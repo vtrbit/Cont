@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Tempo Juntos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fff9fa;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            color: #5a2d3b;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+            background: linear-gradient(135deg, #fff0f3 0%, #ffeef2 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(234, 172, 189, 0.2);
+            border: 1px solid #ffd6e5;
+            position: relative;
+            z-index: 10;
+            margin: 40px auto;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #8b3a5c;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            color: #9e6a7c;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .counter-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .counter-item {
+            position: relative;
+        }
+        
+        .counter-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #d23669;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 3px rgba(210, 54, 105, 0.1);
+        }
+        
+        .counter-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #b37a8f;
+            font-weight: 400;
+        }
+        
+        .heart-decoration {
+            position: absolute;
+            font-size: 1.2rem;
+            color: #ff9bb8;
+            opacity: 0.6;
+        }
+        
+        .heart-1 { top: -15px; left: 10px; }
+        .heart-2 { bottom: -15px; right: 10px; }
+        .heart-3 { top: -10px; right: 15px; }
+        .heart-4 { bottom: -10px; left: 15px; }
+        
+        .footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #b37a8f;
+            font-style: italic;
+        }
+        
+        /* Estilo das fotos polaroid */
+        .polaroid {
+            position: absolute;
+            width: 350px;
+            background: white;
+            padding: 15px 15px 40px 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transform: rotate(var(--rotation));
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+        
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 100;
+        }
+        
+        .polaroid img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid #eee;
+        }
+        
+        .polaroid-caption {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            color: #8b3a5c;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fotos Polaroid serão inseridas aqui pelo JavaScript -->
+    
+    <div class="container">
+        <h1>A quanto tempo estamos juntos?</h1>
+        <div class="subtitle">Tenha essa resposta de uma forma única e surpreendente</div>
+        
+        <div class="counter-grid">
+            <div class="counter-item">
+                <span class="heart-decoration heart-1">♥</span>
+                <div class="counter-value" id="years">0</div>
+                <div class="counter-label">Anos</div>
+                <span class="heart-decoration heart-2">♥</span>
+            </div>
+            
+            <div class="counter-item">
+                <span class="heart-decoration heart-3">♥</span>
+                <div class="counter-value" id="months">0</div>
+                <div class="counter-label">Meses</div>
+                <span class="heart-decoration heart-4">♥</span>
+            </div>
+            
+            <div class="counter-item">
+                <span class="heart-decoration heart-1">♥</span>
+                <div class="counter-value" id="days">0</div>
+                <div class="counter-label">Dias</div>
+                <span class="heart-decoration heart-2">♥</span>
+            </div>
+            
+            <div class="counter-item">
+                <span class="heart-decoration heart-3">♥</span>
+                <div class="counter-value" id="hours">0</div>
+                <div class="counter-label">Horas</div>
+                <span class="heart-decoration heart-4">♥</span>
+            </div>
+            
+            <div class="counter-item">
+                <span class="heart-decoration heart-1">♥</span>
+                <div class="counter-value" id="minutes">0</div>
+                <div class="counter-label">Minutos</div>
+                <span class="heart-decoration heart-2">♥</span>
+            </div>
+            
+            <div class="counter-item">
+                <span class="heart-decoration heart-3">♥</span>
+                <div class="counter-value" id="seconds">0</div>
+                <div class="counter-label">Segundos</div>
+                <span class="heart-decoration heart-4">♥</span>
+            </div>
+        </div>
+        
+        <div class="footer">Cada segundo ao seu lado é um momento especial ♥</div>
+    </div>
+    
+    <script>
+        // Data fixa do início do relacionamento
+        const startDate = new Date(2023, 5, 26, 0, 0, 0); // 26 de Junho de 2023
+        
+        function updateCounter() {
+            const now = new Date();
+            const diffInSeconds = Math.floor((now - startDate) / 1000);
+            
+            // Cálculos de tempo
+            const seconds = diffInSeconds % 60;
+            const minutes = Math.floor(diffInSeconds / 60) % 60;
+            const hours = Math.floor(diffInSeconds / 3600) % 24;
+            const totalDays = Math.floor(diffInSeconds / 86400);
+            
+            // Cálculos precisos para anos, meses e dias
+            const years = calculateYears(startDate, now);
+            const months = calculateMonths(startDate, now) % 12;
+            const days = calculateRemainingDays(startDate, now);
+            
+            // Atualizar a interface
+            document.getElementById('years').textContent = years;
+            document.getElementById('months').textContent = months;
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+        
+        function calculateYears(startDate, endDate) {
+            let years = endDate.getFullYear() - startDate.getFullYear();
+            if (endDate.getMonth() < startDate.getMonth() || 
+                (endDate.getMonth() === startDate.getMonth() && endDate.getDate() < startDate.getDate())) {
+                years--;
+            }
+            return years;
+        }
+        
+        function calculateMonths(startDate, endDate) {
+            let months = (endDate.getFullYear() - startDate.getFullYear()) * 12;
+            months += endDate.getMonth() - startDate.getMonth();
+            if (endDate.getDate() < startDate.getDate()) {
+                months--;
+            }
+            return months;
+        }
+        
+        function calculateRemainingDays(startDate, endDate) {
+            const tempDate = new Date(startDate);
+            const years = calculateYears(startDate, endDate);
+            const months = calculateMonths(startDate, endDate);
+            
+            tempDate.setFullYear(startDate.getFullYear() + years);
+            tempDate.setMonth(startDate.getMonth() + months % 12);
+            
+            const diffTime = endDate - tempDate;
+            return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        }
+        
+        // Função para criar fotos polaroid aleatórias
+        function createPolaroids() {
+            // Array com URLs de imagens de exemplo (substitua pelas suas fotos)
+            const photos = [
+                {url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300", caption: "Nosso início"},
+                {url: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=300", caption: "Primeira viagem"},
+                {url: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300", caption: "Sorrisos juntos"},
+                {url: "https://images.unsplash.com/photo-1494774157365-9e04c6720e47?w=300", caption: "Momento especial"},
+                {url: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=300", caption: "Aventuras"},
+                {url: "bob.png", caption: "Celebrando amor"}
+            ];
+            
+            // Criar 6 polaroids aleatórias
+            for (let i = 0; i < 6; i++) {
+                const polaroid = document.createElement('div');
+                polaroid.className = 'polaroid';
+                
+                // Posição aleatória
+                const left = Math.random() * 85;
+                const top = Math.random() * 100;
+                
+                // Rotação aleatória entre -15 e 15 graus
+                const rotation = (Math.random() * 30) - 15;
+                
+                polaroid.style.setProperty('--rotation', `${rotation}deg`);
+                polaroid.style.left = `${left}%`;
+                polaroid.style.top = `${top}%`;
+                
+                // Selecionar foto aleatória
+                const randomPhoto = photos[Math.floor(Math.random() * photos.length)];
+                
+                polaroid.innerHTML = `
+                    <img src="${randomPhoto.url}" alt="Nossa foto">
+                    <div class="polaroid-caption">${randomPhoto.caption}</div>
+                `;
+                
+                document.body.insertBefore(polaroid, document.body.firstChild);
+            }
+        }
+        
+        // Iniciar contador e criar polaroids quando a página carregar
+        window.onload = function() {
+            updateCounter();
+            setInterval(updateCounter, 1000);
+            createPolaroids();
+        };
+    </script>
+</body>
+</html>
